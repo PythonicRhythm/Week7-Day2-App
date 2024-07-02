@@ -18,14 +18,25 @@ export class PlayerComponent implements OnInit{
     this.currentPlaylist = await this.deezer.grabSpecificPlaylist();
   }
 
-  async playSong(mp3file:any) {
-    const data = await this.deezer.grabSpecificSong();
-    this.currentFile = data;
-    
+  async playSong(track:any) {
+    this.currentFile = track;
+    let audio = document.getElementsByTagName("audio")[0];
+    audio?.pause;
+    audio?.setAttribute("src", track.mp3file);
+    audio?.load;
   }
 
   async grabPlaylist() {
     const data = await this.deezer.grabSpecificPlaylist();
     this.currentPlaylist = data;
+  }
+
+  getFormattedDuration() {
+    let minutes = Math.floor(this.currentFile.duration/60);
+    let seconds = (this.currentFile.duration%60);
+    if(seconds < 10){ 
+      return minutes + ":" + "0" + seconds;
+    }
+    return minutes + ":" + seconds;
   }
 }

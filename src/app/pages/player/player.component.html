@@ -7,18 +7,29 @@
         <div class="playlist-container" *ngIf="currentPlaylist != null && currentPlaylist != undefined">
             <app-track *ngFor="let track of currentPlaylist.tracks.data"
             title="{{track.title_short}}" album_cover="{{track.album.cover_small}}" artist="{{track.artist.name}}"
-            duration="{{track.duration}}" album_title="{{track.album.title}}" mp3file="{{track.preview}}">
+            duration="{{track.duration}}" album_title="{{track.album.title}}" mp3file="{{track.preview}}"
+            album_cover_medium="{{track.album.cover_medium}}" (activeSong)="playSong($event)">
             </app-track>
         </div>
     </div>
     <div class="slider-actions">
         <h1 *ngIf="currentFile == null || currentFile == undefined">No Active Song</h1>
         <div class="track-container" *ngIf="currentFile != null && currentFile != undefined">
-            <h2>{{currentFile.title}}</h2>
-            <audio controls class="audio-panel">
-                <source type="audio/mpeg" src={{currentFile.preview}} />
-                <source type="audio/mp3" src={{currentFile.preview}} />
+            <div class="active-title">
+                <img src="{{currentFile.album.cover_medium}}"/>
+                <div class="active-title-author">
+                    <h2>{{currentFile.title}}</h2>
+                    <p>{{currentFile.artist}}</p>
+                </div>
+            </div>
+            <audio controls class="audio-panel" id="audio" autoplay>
+                <source type="audio/mpeg" src={{currentFile.mp3file}} />
+                <source type="audio/mp3" src={{currentFile.mp3file}} />
             </audio>
+            <div class="active-album-duration">
+                <h2>{{currentFile.album.title}}</h2>
+                <h2>{{getFormattedDuration()}}</h2>
+            </div>
         </div>
     </div>
 </div>

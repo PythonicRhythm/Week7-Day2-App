@@ -75,3 +75,50 @@
     width: 400px;
     height: 40px;
 }
+
+.track-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.active-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.active-title > img {
+    width: 100px;
+    border-radius: 5px;
+}
+
+.active-title-author {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin: 0px;
+    padding: 0px;
+    gap: 0px;
+}
+
+.active-title-author > p,h2 {
+    margin: 0px;
+    padding: 0px;
+}
+
+.active-album-duration {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.active-album-duration > h2 {
+    margin-bottom: 4px;
+}
