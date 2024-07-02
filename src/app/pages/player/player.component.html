@@ -3,8 +3,16 @@
         <h1>Music Player</h1>
     </div>
     <div class="music-container">
-        <!-- <button (click)="playSong()">Track</button> -->
-        <button (click)="grabPlaylist()">Playlist</button>
+        <h2 *ngIf="currentPlaylist != null && currentPlaylist != undefined" class="playlist-title">{{currentPlaylist.title}}</h2>
+        <div class="playlist-container" *ngIf="currentPlaylist != null && currentPlaylist != undefined">
+            <app-track *ngFor="let track of currentPlaylist.tracks.data"
+            title="{{track.title_short}}" album_cover="{{track.album.cover_small}}" artist="{{track.artist.name}}"
+            duration="{{track.duration}}" album_title="{{track.album.title}}" mp3file="{{track.preview}}">
+            </app-track>
+        </div>
+    </div>
+    <div class="slider-actions">
+        <h1 *ngIf="currentFile == null || currentFile == undefined">No Active Song</h1>
         <div class="track-container" *ngIf="currentFile != null && currentFile != undefined">
             <h2>{{currentFile.title}}</h2>
             <audio controls class="audio-panel">
@@ -12,11 +20,5 @@
                 <source type="audio/mp3" src={{currentFile.preview}} />
             </audio>
         </div>
-        <div class="playlist-container" *ngIf="currentPlaylist != null && currentPlaylist != undefined">
-            <h2>{{currentPlaylist.title}}</h2>
-        </div>
-    </div>
-    <div class="slider-actions">
-        <h1>Active Song</h1>
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { DeezerService } from '../../deezer.service';
 
 @Component({
@@ -6,20 +6,19 @@ import { DeezerService } from '../../deezer.service';
   templateUrl: './player.component.html',
   styleUrl: './player.component.css'
 })
-export class PlayerComponent {
-  title = "HELLO";
-  files: Array<any> = [
-    { name: "First Song", artist: "Inder" },
-    { name: "Second Song", artist: "You" }
-  ];
-  state:any;
+export class PlayerComponent implements OnInit{
+  
   currentFile:any;
   audiosrc:any;
   currentPlaylist:any;
 
   constructor(private deezer: DeezerService){}
 
-  async playSong() {
+  async ngOnInit() {
+    this.currentPlaylist = await this.deezer.grabSpecificPlaylist();
+  }
+
+  async playSong(mp3file:any) {
     const data = await this.deezer.grabSpecificSong();
     this.currentFile = data;
     
@@ -28,6 +27,5 @@ export class PlayerComponent {
   async grabPlaylist() {
     const data = await this.deezer.grabSpecificPlaylist();
     this.currentPlaylist = data;
-    console.log(data);
   }
 }
