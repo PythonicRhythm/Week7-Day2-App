@@ -26,6 +26,7 @@
     cursor: pointer;
     -webkit-transform: scale(1.05);
     border: 1px solid rgba(255, 255, 255, 0.363);
+    background-color: rgb(15, 15, 15);
 }
 
 .left-side {
